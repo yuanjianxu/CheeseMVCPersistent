@@ -1,0 +1,9 @@
+﻿@using CheeseMVC.Models;
+<ul>
+    @foreach (CheeseCategory cheeseCategory in ViewBag.cheeseCategories)
+    {
+        <li>@cheeseCategory.ID @cheeseCategory.Name</li>
+    }
+</ul>
+
+<p><a asp-controller="Category" asp-action="Add">Add Category</a></p>
