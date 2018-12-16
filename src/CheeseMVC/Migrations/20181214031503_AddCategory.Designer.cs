@@ -12,9 +12,10 @@ using System;
 namespace CheeseMVC.Migrations
 {
     [DbContext(typeof(CheeseDbContext))]
-    partial class CheeseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181214031503_AddCategory")]
+    partial class AddCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,9 +31,7 @@ namespace CheeseMVC.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<string>("Category");
-
-                    b.Property<int>("CategoryID");
+                    b.Property<int>("Type");
 
                     b.HasKey("ID");
 

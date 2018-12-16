@@ -18,14 +18,11 @@ namespace CheeseMVC.Controllers
             context = dbContext;
         }
 
-        public IActionResult Index(CheeseDbContext context)
+        public IActionResult Index()
         {
            
-            List<CheeseCategory> cheeseCategories = context.Categories.ToList();
-
-            ViewBag.cheeseCategories = cheeseCategories;
-
-            return View();
+            List<CheeseCategory> Categories = context.Categories.ToList();        
+            return View(Categories);
         }
 
         public IActionResult Add()
