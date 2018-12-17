@@ -11,8 +11,8 @@ using System;
 namespace CheeseMVC.Migrations
 {
     [DbContext(typeof(CheeseDbContext))]
-    [Migration("20181216183006_test")]
-    partial class test
+    [Migration("20181216211158_Addmenu")]
+    partial class Addmenu
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

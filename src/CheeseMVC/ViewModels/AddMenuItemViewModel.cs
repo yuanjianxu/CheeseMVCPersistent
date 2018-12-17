@@ -4,12 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using CheeseMVC.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 
 namespace CheeseMVC.ViewModels
 {
     public class AddMenuItemViewModel
     {
+        
         public Menu Menu { get; set; }
         public List<SelectListItem> Cheeses { get; set; }
 

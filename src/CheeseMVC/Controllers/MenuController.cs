@@ -22,7 +22,7 @@ namespace CheeseMVC.Controllers
         public IActionResult Index()
         {
             List<Menu> menus = context.Menus.ToList();    
-            return View();
+            return View(menus);
         }
 
         public IActionResult Add()
@@ -43,8 +43,7 @@ namespace CheeseMVC.Controllers
                 };
                 context.Menus.Add(newMenu);
                 context.SaveChanges();
-
-                return Redirect("/Menu");
+                return Redirect("/Menu/ViewMenu?id="+newMenu.ID);
             }
 
             return View(addMenuViewModel);
@@ -53,15 +52,15 @@ namespace CheeseMVC.Controllers
         public IActionResult ViewMenu(int id)
         {
             List<CheeseMenu> items = context.CheeseMenus.Include(item => item.Cheese).Where(cm => cm.MenuID == id).ToList();
-
+            
             Menu menu = context.Menus.Single(m => m.ID == id);
-
-            ViewMenuViewModel viewModel = new ViewMenuViewModel
+         
+            ViewMenuViewModel viewMenuModel = new ViewMenuViewModel
             {
                 Menu = menu,
                 Items = items
             };
-            return View(viewModel);
+            return View(viewMenuModel);
         }
 
         public IActionResult AddItem(int id)
@@ -79,7 +78,8 @@ namespace CheeseMVC.Controllers
                 var cheeseID = addMenuItemViewModel.CheeseID;
                 var menuID = addMenuItemViewModel.MenuID;
 
-                IList<CheeseMenu> existingItems = context.CheeseMenus.Where(cm => cm.CheeseID == cheeseID).Where(cm => cm.MenuID == menuID).ToList();
+                IList<CheeseMenu> existingItems = context.CheeseMenus.Where(cm => cm.CheeseID == cheeseID)
+                    .Where(cm => cm.MenuID == menuID).ToList();
 
                 if (existingItems.Count == 0)
                 {
@@ -92,7 +92,7 @@ namespace CheeseMVC.Controllers
                     context.CheeseMenus.Add(menuItem);
                     context.SaveChanges();
                 }
-                return Redirect(string.Format("/Menu/ViewMenu/{0}", addMenuItemViewModel));
+                return Redirect(string.Format("/Menu/ViewMenu/{0}", addMenuItemViewModel.MenuID));
             }
             return View(addMenuItemViewModel);
         }

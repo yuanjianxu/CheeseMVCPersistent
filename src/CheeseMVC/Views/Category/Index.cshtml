@@ -2,10 +2,10 @@
 <ul>
     @foreach (var cheeseCategory in Model)
     {
-        <li>@cheeseCategory.ID @cheeseCategory.Name</li>
+        //<li>@cheeseCategory.ID @cheeseCategory.Name</li>
+        <li><a asp-controller="Cheese" asp-action="Category" asp-route-id="@cheeseCategory.ID">@cheeseCategory.Name</a></li>
     }
 </ul>
-
 
 @if (Model.Count == 0)
 {

@@ -28,8 +28,8 @@ namespace CheeseMVC.Controllers
         public IActionResult Add()
         {
             
-            AddCheeseViewModel addCheeseViewModel = new AddCheeseViewModel();
-            context.Categories.ToList();
+            AddCheeseViewModel addCheeseViewModel = new AddCheeseViewModel(context.Categories.ToList());
+           
             return View(addCheeseViewModel);
         }
 
@@ -76,6 +76,18 @@ namespace CheeseMVC.Controllers
             context.SaveChanges();
 
             return Redirect("/");
+        }
+
+        public IActionResult Category(int id)
+        {
+            if (id == 0)
+            {
+                return Redirect("/Category");
+            }
+            CheeseCategory theCategory = context.Categories.Include(cat => cat.Cheeses).Single(cat => cat.ID == id);
+            ViewBag.title = "Cheeses in category:" + theCategory.Name;
+
+            return View("Index", theCategory.Cheeses);
         }
     }
 }
